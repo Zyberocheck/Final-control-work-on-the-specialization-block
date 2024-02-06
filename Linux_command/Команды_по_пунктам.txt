@@ -1,0 +1,327 @@
+1 пункт
+
+mkdir bigtest
+cd bigtest
+
+cat > "Домашние животные"
+Собаки
+Кошки
+Хомяки
+Ctrl+d
+
+cat > "Вьючные животные"
+Лошади
+Верблюды
+Ослы
+Ctrl+d
+
+cat "Домашние животные" "Вьючные животные" > Animals
+cat Animals
+mv "Animals" "Друзья человека"
+
+2 пункт
+
+mkdir folder_for_bigtest
+mv 'Друзья человека' folder_for_bigtest/
+ls
+cd folder_for_bigtest/
+ls
+
+3 пункт
+
+sudo apt-get update
+sudo apt update
+sudo apt install mysql-server
+sudo service mysql status
+
+4 пункт
+
+wget http://ftp.us.debian.org/debian/pool/main/s/sl/sl_5.02-1_amd64.deb
+sudo dpkg -i sl_5.02-1_amd64.deb
+sudo dpkg -r sl
+
+5 пункт
+
+history
+
+6 пункт
+
+Создание схемы в Диаграмма.drawio
+
+7 пункт
+
+sudo mysql
+CREATE DATABASE Друзья_человека;
+
+
+8 пункт
+
+
+use Друзья_человека;
+
+CREATE TABLE Родительский_класс (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  тип VARCHAR(50)
+);
+
+
+CREATE TABLE Домашние_животные (
+  id INT PRIMARY KEY,
+  вид VARCHAR(50),
+  FOREIGN KEY (id) REFERENCES Родительский_класс(id)
+);
+
+
+CREATE TABLE Собаки (
+  id INT PRIMARY KEY,
+  имя VARCHAR(50),
+  команда VARCHAR(50),
+  дата_рождения DATE,
+  FOREIGN KEY (id) REFERENCES Домашние_животные(id)
+);
+
+
+CREATE TABLE Кошки (
+  id INT PRIMARY KEY,
+  имя VARCHAR(50),
+  команда VARCHAR(50),
+  дата_рождения DATE,
+  FOREIGN KEY (id) REFERENCES Домашние_животные(id)
+);
+
+
+CREATE TABLE Хомяки (
+  id INT PRIMARY KEY,
+  имя VARCHAR(50),
+  команда VARCHAR(50),
+  дата_рождения DATE,
+  FOREIGN KEY (id) REFERENCES Домашние_животные(id)
+);
+
+
+CREATE TABLE Вьючные_животные (
+  id INT PRIMARY KEY,
+  вид VARCHAR(50),
+  FOREIGN KEY (id) REFERENCES Родительский_класс(id)
+);
+
+
+CREATE TABLE Лошади (
+  id INT PRIMARY KEY,
+  имя VARCHAR(50),
+  команда VARCHAR(50),
+  дата_рождения DATE,
+  FOREIGN KEY (id) REFERENCES Вьючные_животные(id)
+);
+
+
+CREATE TABLE Верблюды (
+  id INT PRIMARY KEY,
+  имя VARCHAR(50),
+  команда VARCHAR(50),
+  дата_рождения DATE,
+  FOREIGN KEY (id) REFERENCES Вьючные_животные(id)
+);
+
+
+CREATE TABLE Ослы (
+  id INT PRIMARY KEY,
+  имя VARCHAR(50),
+  команда VARCHAR(50),
+  дата_рождения DATE,
+  FOREIGN KEY (id) REFERENCES Вьючные_животные(id)
+);
+
+show databases;
+show tables;
+
+
+9 пункт
+
+drop database if exists Друзья_человека;
+create database Друзья_человека;
+use Друзья_человека;
+
+
+drop table if exists Родительский_класс;
+create table Родительский_класс(
+	id int auto_increment primary key,
+    класс_Родительский_класс varchar(45) not null);
+    
+insert into Родительский_класс (класс_Родительский_класс) values
+('Домашние_животные'),
+('Вьючные_животные');
+
+drop table if exists Домашние_животные;
+create table Домашние_животные(
+	id int auto_increment primary key,
+    класс_Родительский_класс varchar(45) not null,
+    тип_Родительский_класс varchar(45) not null);
+    
+insert into Домашние_животные (класс_Родительский_класс, тип_Родительский_класс) values
+('Домашние_животные', 'Собаки'),
+('Домашние_животные', 'Кошки'),
+('Домашние_животные', 'Хомяки');
+
+drop table if exists Вьючные_животные;
+create table Вьючные_животные(
+	id int auto_increment primary key,
+    класс_Родительский_класс varchar(45) not null,
+    тип_Родительский_класс varchar(45) not null);
+    
+insert into Вьючные_животные (класс_Родительский_класс, тип_Родительский_класс) values
+('Вьючные_животные', 'Лошади'),
+('Вьючные_животные', 'Верблюды'),
+('Вьючные_животные', 'Ослы');
+
+drop table if exists Собаки;
+create table Собаки(
+	id int auto_increment primary key,
+    тип_Родительский_класс varchar(45) not null,
+    имя_Родительский_класс varchar(45) not null,
+    Дата_рождения date not null,
+    Команды text);
+    
+insert into Собаки (тип_Родительский_класс, имя_Родительский_класс, Дата_рождения, Команды) values
+('Собаки', 'Боевой', '2020-10-11', 'Лапу' ),
+('Собаки', 'Гордость', '2020-02-03', 'Голос');
+
+drop table if exists Кошки;
+create table Кошки(
+	id int auto_increment primary key,
+    тип_Родительский_класс varchar(45) not null,
+    имя_Родительский_класс varchar(45) not null,
+    Дата_рождения date not null,
+    Команды text);
+    
+insert into Кошки (тип_Родительский_класс, имя_Родительский_класс, Дата_рождения, Команды) values
+('Кошки', 'Аглоссия', '2016-10-15', 'Кис кис'),
+('Кошки', 'Эри', '2018-01-13', 'Мяу');
+
+drop table if exists Хомяки;
+create table Хомяки(
+	id int auto_increment primary key,
+    тип_Родительский_класс varchar(45) not null,
+    имя_Родительский_класс varchar(45) not null,
+    Дата_рождения date not null,
+    Команды text);
+    
+insert into Хомяки (тип_Родительский_класс, имя_Родительский_класс, Дата_рождения, Команды) values
+('Хомяки', 'Батончик', '2021-03-03', 'Не кусай'),
+('Хомяки', 'Феншуй', '2023-02-08', 'Проснись');
+
+drop table if exists Лошади;
+create table Лошади(
+	id int auto_increment primary key,
+    тип_Родительский_класс varchar(45) not null,
+    имя_Родительский_класс varchar(45) not null,
+    Дата_рождения date not null,
+    Команды text);
+    
+insert into Лошади (тип_Родительский_класс, имя_Родительский_класс, Дата_рождения, Команды) values
+('Лошади', 'Царгун', '2014-03-07', 'Но'),
+('Лошади', 'Бальтазар', '2021-04-06', 'Пррр');
+
+drop table if exists Верблюды;
+create table Верблюды(
+	id int auto_increment primary key,
+    тип_Родительский_класс varchar(45) not null,
+    имя_Родительский_класс varchar(45) not null,
+    Дата_рождения date not null,
+    Команды text);
+    
+insert into Верблюды (тип_Родительский_класс, имя_Родительский_класс, Дата_рождения, Команды) values
+('Верблюды', 'Жанно', '2010-06-06', 'Но вперед'),
+('Верблюды', 'Разум', '2020-04-08', 'Стой'),
+('Верблюды', 'Фархат', '2015-11-11', 'Сидеть');
+
+drop table if exists Ослы;
+create table Ослы(
+	id int auto_increment primary key,
+    тип_Родительский_класс varchar(45) not null,
+    имя_Родительский_класс varchar(45) not null,
+    Дата_рождения date not null,
+    Команды text);
+    
+insert into Ослы (тип_Родительский_класс, имя_Родительский_класс, Дата_рождения, Команды) values
+('Ослы', 'Тоха', '2014-05-05', 'Иди давай'),
+('Ослы', 'Красопеточка', '2022-01-06', 'Быстрее');
+
+
+10 пункт
+
+delete from Верблюды
+where тип_Родительский_класс = 'Верблюды';
+
+create table Лошади_и_Ослы
+select * from Лошади
+union
+select * from Ослы;
+
+
+11 пункт
+
+create table молодые_животные
+select * from Собаки
+where TIMESTAMPDIFF(month, Дата_рождения, now()) > 12 and TIMESTAMPDIFF(month, Дата_рождения, now()) < 36
+union select * from Кошки
+where TIMESTAMPDIFF(month, Дата_рождения, now()) > 12 and TIMESTAMPDIFF(month, Дата_рождения, now()) < 36
+union select * from Хомяки
+where TIMESTAMPDIFF(month, Дата_рождения, now()) > 12 and TIMESTAMPDIFF(month, Дата_рождения, now()) < 36
+union select * from Лошади
+where TIMESTAMPDIFF(month, Дата_рождения, now()) > 12 and TIMESTAMPDIFF(month, Дата_рождения, now()) < 36
+union select * from Верблюды
+where TIMESTAMPDIFF(month, Дата_рождения, now()) > 12 and TIMESTAMPDIFF(month, Дата_рождения, now()) < 36
+union select * from Ослы
+where TIMESTAMPDIFF(month, Дата_рождения, now()) > 12 and TIMESTAMPDIFF(month, Дата_рождения, now()) < 36;
+
+select *, TIMESTAMPDIFF(month, Дата_рождения, now()) as AgeMonth from молодые_животные;
+
+12 пункт
+
+create table Все_типы
+select * from Домашние_животные
+union
+select * from Вьючные_животные;
+
+select * from Все_типы;
+
+create table Все_животные
+select * from Собаки
+union select * from Кошки
+union select * from Хомяки
+union select * from Лошади
+union select * from Верблюды
+union select * from Ослы;
+
+select * from Все_животные
+right join Все_типы
+on Все_животные.тип_Родительский_класс = Все_типы.тип_Родительский_класс;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
